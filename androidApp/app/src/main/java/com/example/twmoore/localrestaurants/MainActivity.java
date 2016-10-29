@@ -7,6 +7,7 @@ public class MainActivity extends AppCompatActivity {
 
 
     private String PlacesAPIKey = "AIzaSyCTgrdsST-RspbNj3TZf78bG68rfqrDiDM";
+    private long[] latitudeLongitude;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,7 +26,9 @@ public class MainActivity extends AppCompatActivity {
     protected void checkPermissions() {
         
     }
-
+    protected long[] getLocation(){
+        //return lat and long
+    }
     protected void onStart(){
 
         mGoogleApiClient.connect();             //connects to Google Play services
@@ -59,7 +62,15 @@ public class MainActivity extends AppCompatActivity {
         String url = "//maps.googleapis.com/maps/api/place/nearbysearch/json?";
         //parameters
         int locationRadius = 40500;
-        
+        long latLongitude;
+        String open = "opennow";
+        String rankby = "prominence";
+
+        //Build URL
+        url.append("&" + open);
+        url.append("&radius=" + locationRadius);
+        url.append("&rankby=" + rankby);
+        url.append("&key=" + PlacesAPIKey);
 
     }
 }
