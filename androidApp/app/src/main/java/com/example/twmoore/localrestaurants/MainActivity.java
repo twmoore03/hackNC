@@ -1,22 +1,27 @@
 package com.example.twmoore.localrestaurants;
-import java.lang.String;
 
+import android.*;
+import android.Manifest;
+import android.content.pm.PackageManager;
+import android.location.Location;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationServices;
+
+import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 
 public class MainActivity extends AppCompatActivity,implements
         GoogleApiClient.OnConnectionFailedListener, GoogleApiClient.ConnectionCallbacks {
 
     private GoogleApiClient mGoogleApiClient;
     private String PlacesAPIKey = "AIzaSyCTgrdsST-RspbNj3TZf78bG68rfqrDiDM";
-    private long[] latitudeLongitude;
+    private double[] latitudeLongitude;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,10 +35,6 @@ public class MainActivity extends AppCompatActivity,implements
                     .addApi(LocationServices.API)
                     .build();
         }
-    }
-
-    protected void checkPermissions() {
-
     }
 
     protected void onStart(){
@@ -88,8 +89,31 @@ public class MainActivity extends AppCompatActivity,implements
     }
 
     @Override
-    public void onConnected(@Nullable Bundle bundle) {
+    public void onConnected(Bundle connectionHint) {
+        //need to add a checkPermission method
 
+        int permissionCheck = ContextCompat.checkSelfPermission(this,
+                ACCESS_FINE_LOCATION);
+
+        if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
+            if(ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION)) {
+
+                //Show an explanation to the user. After the user sees the explanation, try again to request permission
+            } else {
+                //need to define an int for this later on for mypermissions request
+               /*
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+                        MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
+                        */
+            }
+        } else {
+            Location mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+            //need to define an xmlString for that I think
+            if (mLastLocation != null) {
+                latitudeLongitude[0] = mLastLocation.getLatitude();
+                latitudeLongitude[1] = mLastLocation.getLongitude();
+                }
+        }
     }
 
     @Override
