@@ -5,6 +5,9 @@ import android.support.v7.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
 
+
+    private String PlacesAPI = "AIzaSyCTgrdsST-RspbNj3TZf78bG68rfqrDiDM";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -15,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
                     .addConnectionCallbacks(this)
                     .addOnConnectionFailedListener(this)
                     .addApi(LocationServices.API)
+
                     .build();
         }
     }
