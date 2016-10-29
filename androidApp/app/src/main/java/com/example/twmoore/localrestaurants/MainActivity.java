@@ -1,4 +1,5 @@
 package com.example.twmoore.localrestaurants;
+import java.lang.String;
 
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -66,10 +67,11 @@ public class MainActivity extends AppCompatActivity,implements
 
     protected long[] getLocation(){
         //return lat and long
+        return null;
     }
 
     protected String[] nearbyPlace(){
-        String url = "//maps.googleapis.com/maps/api/place/nearbysearch/json?";
+        StringBuilder url = new StringBuilder("//maps.googleapis.com/maps/api/place/nearbysearch/json?");
         //parameters
         int locationRadius = 40500;
         long latLongitude;
@@ -81,6 +83,8 @@ public class MainActivity extends AppCompatActivity,implements
         url.append("&radius=" + locationRadius);
         url.append("&rankby=" + rankby);
         url.append("&key=" + PlacesAPIKey);
+
+        return null;
     }
 
     @Override
