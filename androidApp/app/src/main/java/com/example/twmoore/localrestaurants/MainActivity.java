@@ -6,7 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 public class MainActivity extends AppCompatActivity {
 
 
-    private String PlacesAPI = "AIzaSyCTgrdsST-RspbNj3TZf78bG68rfqrDiDM";
+    private String PlacesAPIKey = "AIzaSyCTgrdsST-RspbNj3TZf78bG68rfqrDiDM";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,7 +18,6 @@ public class MainActivity extends AppCompatActivity {
                     .addConnectionCallbacks(this)
                     .addOnConnectionFailedListener(this)
                     .addApi(LocationServices.API)
-
                     .build();
         }
     }
@@ -53,6 +52,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     protected void onRestart(){
+
+    }
+
+    protected String[] nearbyPlace(){
+        String url = "//maps.googleapis.com/maps/api/place/nearbysearch/json?";
+        //parameters
+        int locationRadius = 40500;
+        
 
     }
 }
