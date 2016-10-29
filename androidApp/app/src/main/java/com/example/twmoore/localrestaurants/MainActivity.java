@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity,implements
         return null;
     }
 
-    protected String[] nearbyPlace(){
+    protected String[] getNearbyPlace(){
         StringBuilder url = new StringBuilder("//maps.googleapis.com/maps/api/place/nearbysearch/json?");
         //parameters
         int locationRadius = 40500;
