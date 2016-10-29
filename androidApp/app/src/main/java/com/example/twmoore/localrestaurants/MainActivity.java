@@ -8,9 +8,8 @@ import com.google.android.gms.location.LocationServices;
 
 public class MainActivity extends AppCompatActivity {
 
-
-    private String PlacesAPIKey = "AIzaSyCTgrdsST-RspbNj3TZf78bG68rfqrDiDM";
     private GoogleApiClient mGoogleApiClient;
+    private String PlacesAPIKey = "AIzaSyCTgrdsST-RspbNj3TZf78bG68rfqrDiDM";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,6 +84,43 @@ public class MainActivity extends AppCompatActivity {
     }
 
     protected void onRestart(){
+
+    }
+
+    protected void onStart(){
+
+        mGoogleApiClient.connect();             //connects to Google Play services
+        super.onStart();
+    }
+
+    protected void onPause(){
+
+    }
+
+    protected void onDestroy(){
+
+    }
+
+    protected void onResume(){
+
+    }
+
+    protected void onStop(){
+
+        mGoogleApiClient.disconnect();          //disconnects from Google Play services
+        super.onStop();
+
+    }
+
+    protected void onRestart(){
+
+    }
+
+    protected String[] nearbyPlace(){
+        String url = "//maps.googleapis.com/maps/api/place/nearbysearch/json?";
+        //parameters
+        int locationRadius = 40500;
+        
 
     }
 
