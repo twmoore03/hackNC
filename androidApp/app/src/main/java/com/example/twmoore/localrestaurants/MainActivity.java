@@ -16,7 +16,7 @@ import com.google.android.gms.location.LocationServices;
 
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 
-public class MainActivity extends AppCompatActivity,implements
+public class MainActivity extends AppCompatActivity, ListActivity, implements
         GoogleApiClient.OnConnectionFailedListener, GoogleApiClient.ConnectionCallbacks {
 
     private GoogleApiClient mGoogleApiClient;
@@ -35,6 +35,10 @@ public class MainActivity extends AppCompatActivity,implements
                     .addApi(LocationServices.API)
                     .build();
         }
+
+        String[] resturants = {"Test1", "Test2"};
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(getListView().getConext(), android.R.layout.simple_list_item_1, resturants);
+        getListView().setAdapter(adapter);
     }
 
     protected void onStart(){
