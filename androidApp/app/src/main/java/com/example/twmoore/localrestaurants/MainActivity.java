@@ -14,6 +14,9 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationServices;
 
+import java.io.IOException;
+import java.net.*;
+
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 
 public class MainActivity extends AppCompatActivity,implements
@@ -78,11 +81,13 @@ public class MainActivity extends AppCompatActivity,implements
         return latitudeLongitude[1];
     }
 
-    protected String[] getNearbyPlace(){
+    protected Object getNearbyPlace(){
         StringBuilder url = new StringBuilder("//maps.googleapis.com/maps/api/place/nearbysearch/json?");
+        Object output;
+
         //parameters
         int locationRadius = 40500;
-        long latLongitude;
+        double[] latLongitude = getLocation();
         String open = "opennow";
         String rankby = "prominence";
 
@@ -91,9 +96,23 @@ public class MainActivity extends AppCompatActivity,implements
         url.append("&radius=" + locationRadius);
         url.append("&rankby=" + rankby);
         url.append("&key=" + PlacesAPIKey);
+        url.append("&location=" + getLatitude() + "," + getLongitude());
+        String urlString = url.toString();
 
-        return null;
-    }
+        //connection
+        try{
+        URL connection = new URL(urlString);
+            output = connection.getContent();}
+        catch (MalformedURLException e){
+            System.out.println("URL failure");
+        }
+        catch (IOException e){
+            System.out.println("Input Output Error");
+        }
+
+
+        return output;
+
 
     @Override
     public void onConnected(Bundle connectionHint) {
