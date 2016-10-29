@@ -76,6 +76,5 @@ public class MainActivity extends AppCompatActivity {
         url.append("&radius=" + locationRadius);
         url.append("&rankby=" + rankby);
         url.append("&key=" + PlacesAPIKey);
-
     }
 }
