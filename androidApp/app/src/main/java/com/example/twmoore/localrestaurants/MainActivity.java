@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity implements
     private String PlacesAPIKey = "AIzaSyCTgrdsST-RspbNj3TZf78bG68rfqrDiDM";
     private Location mLastLocation;
     private String output;
-
+    private ArrayList<Restaurant>  restArray = new ArrayList<>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,12 +75,13 @@ public class MainActivity extends AppCompatActivity implements
     protected void onResume() {
         super.onResume();
         getNearbyPlace();
-        System.out.println(output);
+
         try {
             getRestaurantDataFromJSON(output);
         } catch (JSONException e) {
             e.printStackTrace();
         }
+        System.out.println("success");
         // convertToArray();
 
     }
@@ -247,6 +248,7 @@ public class MainActivity extends AppCompatActivity implements
             ArrayList<String> resultsArrayList = new ArrayList<String>();
             for (int i = 0; i < resultsArray.length(); i++) {
                 JSONObject restaurant = resultsArray.getJSONObject(i);
+                restArray.add(i, new Restaurant(restaurant.getString("name"),12.43534,true,1));
                 System.out.println(restaurant.getString("name"));
 
 
