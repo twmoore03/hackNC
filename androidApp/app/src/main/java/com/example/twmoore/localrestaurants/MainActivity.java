@@ -16,6 +16,7 @@ import com.google.android.gms.location.LocationServices;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -223,7 +224,32 @@ public class MainActivity extends AppCompatActivity implements
             System.out.println("JSON Exception");
 
         }
+    }
+
+    public void getRestaurantDataFromJSON(String restaurantJsonStr) throws JSONException {
+        final String RESULTS= "results";
+        final String NAME= "name";
+        final String LATITUDE= "lat";
+        final String LONGITUDE = "lng";
+        final String RATING = "rating";
+
+        try {
+            JSONObject restaurantJson = new JSONObject(restaurantJsonStr);
+            JSONArray resultsArray = restaurantJson.getJSONArray(RESULTS);
+
+            ArrayList<String> resultsArrayList = new ArrayList<String>();
+            for (int i = 0; i < resultsArray.length(); i++) {
+                String name;
+                String latitude;
+                String longitude;
+                String rating;
+
+                JSONObject restaurantName = resultsArray.getJSONObject(i);
+            }
 
 
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 }
