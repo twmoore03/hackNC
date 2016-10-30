@@ -6,7 +6,7 @@ package com.example.twmoore.localrestaurants;
 
 public class Restaurant {
 
-    private int closeTime;
+    private int rating;
 
     private double distance;
 
@@ -14,19 +14,18 @@ public class Restaurant {
 
     private boolean doesDeliv;
 
-    public Restaurant(String name, String type, int openTime, int closeTime){
+    public Restaurant(String name, double distance, boolean doesDeliv, int closeTime){
 
-        this.closeTime = closeTime;
+        this.rating = closeTime;
 
         this.name = name;
-        this.type = type;
-        distance = 0;
-        doesDeliv = false;
+        this.distance = distance;
+        this.doesDeliv = doesDeliv;
     }
 
-    public void setCloseTime(int close){
+    public void setRating(int close){
 
-        closeTime = close;
+        rating = close;
 
     }
 
@@ -54,8 +53,8 @@ public class Restaurant {
         return distance;
     }
 
-    public int getCloseTime() {
-        return closeTime;
+    public int getRating() {
+        return rating;
     }
 
     public String getName() {
@@ -70,8 +69,21 @@ public class Restaurant {
         this.type = type;
     }
 
-    @Override
-    public String toString() {
-        return " ";
+    public String distanceString(){
+        return distance + " miles away";
+    }
+
+    public String ratingString(){
+        return rating + "/5";
+    }
+
+    public String delivString(){
+        if(doesDeliv){
+            return "Delivers";
+        }
+
+        else{
+            return "Does not Deliver";
+        }
     }
 }
