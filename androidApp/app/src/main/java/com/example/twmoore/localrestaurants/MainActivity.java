@@ -19,7 +19,6 @@ import org.json.JSONException;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -35,7 +34,7 @@ public class MainActivity extends AppCompatActivity implements
     private GoogleApiClient mGoogleApiClient;
     private String PlacesAPIKey = "AIzaSyCTgrdsST-RspbNj3TZf78bG68rfqrDiDM";
     private Location mLastLocation;
-    private Object output;
+    private String output;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,22 +59,23 @@ public class MainActivity extends AppCompatActivity implements
 
         super.onStart();
         mGoogleApiClient.connect();             //connects to Google Play services
-        //getNearbyPlace();
+
 
     }
 
     protected void onPause() {
-
+        super.onPause();
     }
 
     protected void onDestroy() {
-
+        super.onDestroy();
     }
 
     protected void onResume() {
         super.onResume();
         getNearbyPlace();
-        convertToArray();
+
+       // convertToArray();
 
     }
 
@@ -87,6 +87,7 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     protected void onRestart() {
+        super.onRestart();
 
     }
 
@@ -130,25 +131,30 @@ public class MainActivity extends AppCompatActivity implements
 
         //connection
         output = null;
+        StringBuilder content = new StringBuilder();
+        BufferedReader buffer = null;
         try {
             URL connection = new URL(urlString);
             HttpsURLConnection urlConnection = (HttpsURLConnection) connection.openConnection();
             urlConnection.setRequestMethod("GET");
             urlConnection.connect();
 
-            //read input stream
-            InputStream input = urlConnection.getInputStream();
-            StringBuffer buffer = new StringBuffer();
 
-            BufferedReader reader = new BufferedReader(new InputStreamReader(input));
+
+            //read input stream
+
+            buffer = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
+
+
             String line;
-            while ((line = reader.readLine()) != null) {
-                buffer.append(line + "/n");
+            while ((line = buffer.readLine()) != null) {
+                content.append(line + "/n");
 
             }
+            buffer.close();
 
-            output = buffer.toString();
-            System.out.println(output);
+
+
 
         } catch (MalformedURLException e) {
             System.out.println(urlString);
@@ -156,6 +162,8 @@ public class MainActivity extends AppCompatActivity implements
         } catch (IOException e) {
             System.out.println("Input Output Error");
         }
+
+        output = content.toString();
 
 
         return output;
