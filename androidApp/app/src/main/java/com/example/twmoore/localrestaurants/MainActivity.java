@@ -41,9 +41,9 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     protected void onStart() {
-
-        mGoogleApiClient.connect();             //connects to Google Play services
         super.onStart();
+        mGoogleApiClient.connect();             //connects to Google Play services
+        //getNearbyPlace();
 
     }
 
@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     protected void onResume() {
-
+        super.onResume();
     }
 
     protected void onStop() {
@@ -118,11 +118,12 @@ public class MainActivity extends AppCompatActivity implements
 
         @Override
         public void onConnected (Bundle connectionHint){
+            System.out.println("connection success");
             //need to add a checkPermission method
 
             int permissionCheck = ContextCompat.checkSelfPermission(this,
                     ACCESS_FINE_LOCATION);
-
+                int status = PackageManager.PERMISSION_GRANTED;
             if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
                 if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION)) {
 
@@ -150,6 +151,6 @@ public class MainActivity extends AppCompatActivity implements
 
         @Override
         public void onConnectionFailed (ConnectionResult connectionResult){
-
+            System.out.println("connection failed");
         }
     }
