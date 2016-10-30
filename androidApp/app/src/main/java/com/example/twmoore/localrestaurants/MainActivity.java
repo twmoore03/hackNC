@@ -23,26 +23,8 @@ public class MainActivity extends AppCompatActivity implements
 
     private GoogleApiClient mGoogleApiClient;
     private String PlacesAPIKey = "AIzaSyCTgrdsST-RspbNj3TZf78bG68rfqrDiDM";
-    private double[] latitudeLongitude;
-    /*
-    private ListView listView; 
-    private ArrayAdapter<String> adapter; 
-    private String[] list = {
-            "Test1",
-            "Test2",
-            "Test1",
-            "Test2",
-            "Test1",
-            "Test2",
-            "Test1",
-            "Test2",
-            "Test1",
-            "Test2",
-            "Test1",
-            "Test2",
-            "Test1",
-            "Test2"};
-*/
+    private Location mLastLocation;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,12 +37,6 @@ public class MainActivity extends AppCompatActivity implements
                     .addApi(LocationServices.API)
                     .build();
         }
-/*
-        listView = (ListView) findViewById(R.id.view);
-        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, list); 
-        listView.setAdapter(adapter);
-
-*/
     }
 
     protected void onStart() {
@@ -93,16 +69,22 @@ public class MainActivity extends AppCompatActivity implements
 
     }
 
-    protected double[] getLocation() {
-        return latitudeLongitude;
+    protected Location getLocation() {
+        return mLastLocation;
     }
 
     protected double getLatitude() {
-        return latitudeLongitude[0];
+       if (getLocation() != null) {
+           return getLocation().getLatitude();
+       }
+        return 0;
     }
 
     protected double getLongitude() {
-        return latitudeLongitude[1];
+        if (getLocation() != null) {
+            return getLocation().getLongitude();
+        }
+        return 0;
     }
 
     protected Object getNearbyPlace() {
@@ -111,7 +93,6 @@ public class MainActivity extends AppCompatActivity implements
 
         //parameters
         int locationRadius = 40500;
-        double[] latLongitude = getLocation();
         String open = "opennow";
         String rankby = "prominence";
 
@@ -159,12 +140,9 @@ public class MainActivity extends AppCompatActivity implements
 
                 }
             } else {
-                Location mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+                 mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
                 //need to define an xmlString for that I think
-                if (mLastLocation != null) {
-                    latitudeLongitude[0] = mLastLocation.getLatitude();
-                    latitudeLongitude[1] = mLastLocation.getLongitude();
-                }
+
             }
         }
         @Override
