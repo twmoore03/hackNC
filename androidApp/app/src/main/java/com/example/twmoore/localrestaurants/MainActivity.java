@@ -75,8 +75,13 @@ public class MainActivity extends AppCompatActivity implements
     protected void onResume() {
         super.onResume();
         getNearbyPlace();
-
-       // convertToArray();
+        System.out.println(output);
+        try {
+            getRestaurantDataFromJSON(output);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        // convertToArray();
 
     }
 
@@ -232,19 +237,27 @@ public class MainActivity extends AppCompatActivity implements
         final String LATITUDE= "lat";
         final String LONGITUDE = "lng";
         final String RATING = "rating";
-
+        restaurantJsonStr = restaurantJsonStr.replaceAll("/n"," ");
+        String newString = restaurantJsonStr + "\"" + "}" + "]" + "}";
+        System.out.println(newString);
         try {
             JSONObject restaurantJson = new JSONObject(restaurantJsonStr);
             JSONArray resultsArray = restaurantJson.getJSONArray(RESULTS);
 
             ArrayList<String> resultsArrayList = new ArrayList<String>();
             for (int i = 0; i < resultsArray.length(); i++) {
-                String name;
-                String latitude;
-                String longitude;
-                String rating;
+                JSONObject restaurant = resultsArray.getJSONObject(i);
+                System.out.println(restaurant.getString("name"));
 
-                JSONObject restaurantName = resultsArray.getJSONObject(i);
+
+
+
+//                String name;
+//                String latitude;
+//                String longitude;
+//                String rating;
+//
+//                JSONObject restaurantName = resultsArray.getJSONObject(i);
             }
 
 
@@ -252,4 +265,6 @@ public class MainActivity extends AppCompatActivity implements
             e.printStackTrace();
         }
     }
+
+
 }
