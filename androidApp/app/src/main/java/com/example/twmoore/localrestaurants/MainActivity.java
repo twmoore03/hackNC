@@ -7,8 +7,6 @@ import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.ListView;
-import android.widget.ArrayAdapter;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -26,6 +24,7 @@ public class MainActivity extends AppCompatActivity implements
     private GoogleApiClient mGoogleApiClient;
     private String PlacesAPIKey = "AIzaSyCTgrdsST-RspbNj3TZf78bG68rfqrDiDM";
     private double[] latitudeLongitude;
+    /*
     private ListView listView; 
     private ArrayAdapter<String> adapter; 
     private String[] list = {
@@ -43,7 +42,7 @@ public class MainActivity extends AppCompatActivity implements
             "Test2",
             "Test1",
             "Test2"};
-
+*/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,12 +55,12 @@ public class MainActivity extends AppCompatActivity implements
                     .addApi(LocationServices.API)
                     .build();
         }
-
+/*
         listView = (ListView) findViewById(R.id.view);
         adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, list); 
         listView.setAdapter(adapter);
 
-
+*/
     }
 
     protected void onStart() {
@@ -154,10 +153,10 @@ public class MainActivity extends AppCompatActivity implements
                     //Show an explanation to the user. After the user sees the explanation, try again to request permission
                 } else {
                     //need to define an int for this later on for mypermissions request
-               /*
+
                 ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                        MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
-                        */
+                        1);
+
                 }
             } else {
                 Location mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
