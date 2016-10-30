@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.ListView;
+import android.widget.ArrayAdapter;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -24,6 +26,23 @@ public class MainActivity extends AppCompatActivity implements
     private GoogleApiClient mGoogleApiClient;
     private String PlacesAPIKey = "AIzaSyCTgrdsST-RspbNj3TZf78bG68rfqrDiDM";
     private double[] latitudeLongitude;
+    private ListView listView; 
+    private ArrayAdapter<String> adapter; 
+    private String[] list = {
+            "Test1",
+            "Test2",
+            "Test1",
+            "Test2",
+            "Test1",
+            "Test2",
+            "Test1",
+            "Test2",
+            "Test1",
+            "Test2",
+            "Test1",
+            "Test2",
+            "Test1",
+            "Test2"};
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +56,11 @@ public class MainActivity extends AppCompatActivity implements
                     .addApi(LocationServices.API)
                     .build();
         }
+
+        listView = (ListView) findViewById(R.id.view);
+        adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, list); 
+        listView.setAdapter(adapter);
+
 
     }
 
