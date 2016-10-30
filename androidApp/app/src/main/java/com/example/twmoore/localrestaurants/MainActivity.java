@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.ListView;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -24,6 +25,12 @@ public class MainActivity extends AppCompatActivity implements
     private GoogleApiClient mGoogleApiClient;
     private String PlacesAPIKey = "AIzaSyCTgrdsST-RspbNj3TZf78bG68rfqrDiDM";
     private Location mLastLocation;
+    private ListView listView;
+    private String[] names;
+    private double[] distance;
+    private boolean[] deliv;
+    private int[] rating;
+    private RestuarantAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +44,17 @@ public class MainActivity extends AppCompatActivity implements
                     .addApi(LocationServices.API)
                     .build();
         }
+
+        listView = (ListView) findViewById(R.id.list_view);
+        int i = 0;
+        adapter = new RestuarantAdapter(getApplicationContext(), R.layout.row_layout);
+        listView.setAdapter(adapter);
+        for(String name1: names){
+            Restaurant restaurant = new Restaurant(names[i], distance[i], deliv[i], rating[i]);
+            adapter.add(restaurant);
+            i++;
+        }
+
     }
 
     protected void onStart() {

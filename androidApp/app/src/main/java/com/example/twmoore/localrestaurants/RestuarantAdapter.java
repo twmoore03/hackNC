@@ -10,7 +10,6 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 /**
  * Created by lackeyw on 10/30/16.
@@ -28,7 +27,7 @@ public class RestuarantAdapter extends ArrayAdapter{
 
         TextView name;
         TextView distance;
-        TextView close;
+        TextView rating;
         TextView doesDeliv;
     }
 
@@ -62,7 +61,7 @@ public class RestuarantAdapter extends ArrayAdapter{
             handler = new dataHandler();
             handler.name = (TextView)row.findViewById(R.id.res_name);
             handler.distance = (TextView)row.findViewById(R.id.distance);
-            handler.close = (TextView)row.findViewById(R.id.close_time);
+            handler.rating = (TextView)row.findViewById(R.id.close_time);
             handler.doesDeliv = (TextView)row.findViewById(R.id.does_delivery);
             row.setTag(handler);
         }
@@ -75,7 +74,7 @@ public class RestuarantAdapter extends ArrayAdapter{
         restaurant = (Restaurant)this.getItem(position);
         handler.name.setText(restaurant.getName());
         handler.doesDeliv.setText(restaurant.delivString());
-        handler.close.setText(restaurant.closeString());
+        handler.rating.setText(restaurant.ratingString());
         handler.distance.setText(restaurant.distanceString());
 
         return row;
