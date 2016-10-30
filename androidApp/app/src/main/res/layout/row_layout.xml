@@ -1,16 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:padding="20dp">
 <TextView
     android:id="@+id/res_name"
-    android:layout_width="175dp"
+    android:layout_width="match_parent"
     android:layout_height="75dp"
     android:gravity="center"
-    android:text="Bruh"/>
+    android:text="McDonalds" />
     <TextView
+        android:id="@+id/distance"
         android:layout_width="wrap_content"
-        android:layout_height="75dp"
-        android:layout_toRightOf="@id/res_name"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/res_name"
+        android:layout_alignBottom="@id/res_name"
+        android:text="5.2 miles away"/>
+    <TextView
+        android:id="@+id/close_time"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@id/res_name"
+        android:layout_alignBottom="@id/res_name"
+        android:text="Closes at 10"/>
+    <TextView
+        android:id="@+id/does_delivery"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignRight="@id/res_name"
         android:gravity="center"
-        android:text="Hello World"/>
+        android:text="Does not deliver"/>
+
+
+
 </RelativeLayout>

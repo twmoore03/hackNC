@@ -70,8 +70,21 @@ public class Restaurant {
         this.type = type;
     }
 
-    @Override
-    public String toString() {
-        return " ";
+    public String distanceString(){
+        return distance + " miles away";
+    }
+
+    public String closeString(){
+        return closeTime + ":00";
+    }
+
+    public String delivString(){
+        if(doesDeliv){
+            return "Delivers";
+        }
+
+        else{
+            return "Does not Deliver";
+        }
     }
 }
