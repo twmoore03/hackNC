@@ -9,7 +9,7 @@
     android:gravity="center"
     android:text="McDonalds"
     android:textColor= "#000000"
-    android:textSize="20dp"
+    android:textSize="17dp"
     android:textStyle="bold"/>
     <TextView
         android:id="@+id/distance"
@@ -19,7 +19,7 @@
         android:layout_alignBottom="@id/res_name"
         android:text="5.2 miles away"
         android:textColor= "#000000"
-        android:textSize="17dp"/>
+        android:textSize="14dp"/>
     <TextView
         android:id="@+id/close_time"
         android:layout_width="wrap_content"
@@ -28,7 +28,7 @@
         android:layout_alignBottom="@id/res_name"
         android:text="Closes at 10"
         android:textColor= "#000000"
-        android:textSize="17dp"/>
+        android:textSize="14dp"/>
     <TextView
         android:id="@+id/does_delivery"
         android:layout_width="wrap_content"
@@ -37,7 +37,7 @@
         android:gravity="center"
         android:text="Does not deliver"
         android:textColor= "#000000"
-        android:textSize="17dp"/>
+        android:textSize="14dp"/>
     <View
         android:layout_width="match_parent"
         android:layout_height="2dp"

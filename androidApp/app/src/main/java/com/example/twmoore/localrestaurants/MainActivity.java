@@ -273,7 +273,7 @@ public class MainActivity extends AppCompatActivity implements
             ArrayList<String> resultsArrayList = new ArrayList<String>();
             for (int i = 0; i < resultsArray.length(); i++) {
                 JSONObject restaurant = resultsArray.getJSONObject(i);
-                restArray.add(i, new Restaurant(restaurant.getString("name"),12.43534,true,1));
+                restArray.add(i, new Restaurant(restaurant.getString("name"),12.43534,true,restaurant.getInt("rating")));
                 System.out.println(restaurant.getString("name"));
 
 
