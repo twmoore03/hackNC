@@ -9,6 +9,7 @@ import android.os.StrictMode;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.widget.ListView;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -37,6 +38,9 @@ public class MainActivity extends AppCompatActivity implements
     private Location mLastLocation;
     private String output;
     private ArrayList<Restaurant>  restArray = new ArrayList<>();
+    private ListView listView;
+    private RestuarantAdapter adapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,6 +54,7 @@ public class MainActivity extends AppCompatActivity implements
                     .build();
         }
 
+
     }
 
     protected void onStart() {
@@ -59,7 +64,27 @@ public class MainActivity extends AppCompatActivity implements
         mGoogleApiClient.connect();     //connects to Google Play services
 
         super.onStart();
-        mGoogleApiClient.connect();             //connects to Google Play services
+        mGoogleApiClient.connect();
+
+        listView = (ListView) findViewById(R.id.list_view);
+
+        adapter = new RestuarantAdapter(getApplicationContext(), R.layout.row_layout);
+        listView.setAdapter(adapter);
+
+        getNearbyPlace();
+
+        try {
+            getRestaurantDataFromJSON(output);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("success");
+
+        for(int i = 0; i < restArray.size(); i ++) {
+
+            adapter.add(restArray.get(i));
+        }//connects to Google Play services
 
 
     }
