@@ -146,19 +146,21 @@ public class MainActivity extends AppCompatActivity implements
 
 
         //parameters
-        int locationRadius = 40500;
+        int locationRadius = 10000;
         String open = "opennow";
         String rankby = "prominence";
-        String type = "restaurant";
+        String type1 = "meal_takeaway";
+        String type2 = "restaurant";
+        String type3 = "food";
 
         //Build URL
         url.append("&" + open);
         url.append("&radius=" + locationRadius);
         url.append("&rankby=" + rankby);
         url.append("&key=" + PlacesAPIKey);
-        // url.append("&location=" + 35.910180 + "," + getLongitude());
+        // url.append("&location=" + getLatitude() + "," + getLongitude());
         url.append("&location=35.910180,-79.045277");
-        url.append("&type=" + type);
+        url.append("&type=" + type1 );
         String urlString = url.toString();
 
         //connection
