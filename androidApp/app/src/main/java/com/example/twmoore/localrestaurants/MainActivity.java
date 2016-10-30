@@ -23,7 +23,7 @@ public class MainActivity extends AppCompatActivity implements
 
     private GoogleApiClient mGoogleApiClient;
     private String PlacesAPIKey = "AIzaSyCTgrdsST-RspbNj3TZf78bG68rfqrDiDM";
-    private Location lastLocation;
+    private Location mLastLocation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -70,7 +70,7 @@ public class MainActivity extends AppCompatActivity implements
     }
 
     protected Location getLocation() {
-        return lastLocation;
+        return mLastLocation;
     }
 
     protected double getLatitude() {
@@ -140,11 +140,9 @@ public class MainActivity extends AppCompatActivity implements
 
                 }
             } else {
-                Location mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+                 mLastLocation = LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
                 //need to define an xmlString for that I think
-                if (mLastLocation != null) {
-                    double longitude = mLastLocation.getLongitude();
-                }
+
             }
         }
         @Override
