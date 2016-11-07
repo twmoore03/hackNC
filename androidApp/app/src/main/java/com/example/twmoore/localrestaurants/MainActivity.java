@@ -40,6 +40,10 @@ public class MainActivity extends AppCompatActivity implements
     private ArrayList<Restaurant>  restArray = new ArrayList<>();
     private ListView listView;
     private RestuarantAdapter adapter;
+    private double myLat;
+    private double myLong;
+    private double lat;
+    private double longi;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -265,6 +269,9 @@ public class MainActivity extends AppCompatActivity implements
         final String LATITUDE= "lat";
         final String LONGITUDE = "lng";
         final String RATING = "rating";
+
+        myLat = getLatitude();
+        myLong = getLongitude();
         restaurantJsonStr = restaurantJsonStr.replaceAll("/n"," ");
         String newString = restaurantJsonStr + "\"" + "}" + "]" + "}";
         System.out.println(newString);
@@ -275,7 +282,13 @@ public class MainActivity extends AppCompatActivity implements
             ArrayList<String> resultsArrayList = new ArrayList<String>();
             for (int i = 0; i < resultsArray.length(); i++) {
                 JSONObject restaurant = resultsArray.getJSONObject(i);
-                restArray.add(i, new Restaurant(restaurant.getString("name"),12.43534,true,restaurant.getInt("rating")));
+
+                lat = restaurant.getDouble("lat");
+                longi = restaurant.getDouble("lng");
+
+
+
+                restArray.add(i, new Restaurant(restaurant.getString("name"),distance(myLat, myLong, lat, longi),true,restaurant.getInt("rating")));
                 System.out.println(restaurant.getString("name"));
 
 
@@ -293,6 +306,17 @@ public class MainActivity extends AppCompatActivity implements
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+
+    private double distance(double myLat, double myLong, double lattitude, double longitude){
+
+        double distance = 0;
+
+        double p = Math.PI/180;
+
+        distance = 0.5 - Math.cos((lattitude-myLat)*p)/2 + Math.cos(myLat*p)*Math.cos(lattitude*p) * (1-Math.cos((longitude-myLong)*p))/2;
+
+        return distance;
     }
 
 
